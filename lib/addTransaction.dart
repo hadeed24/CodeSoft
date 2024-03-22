@@ -2,7 +2,7 @@ import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:personal_expense_tracker/transactions_list.dart';
+import 'package:intl/intl.dart';
 import 'package:personal_expense_tracker/variables.dart';
 
 class add_transactions extends StatefulWidget {
@@ -16,6 +16,8 @@ class _add_transactionsState extends State<add_transactions> {
   String saveAmount = '';
   int saveAmountwithoutComma = 0;
   String EntryType = "none";
+
+  DateTime now = DateTime.now();
 
   @override
   void initState() {
@@ -56,8 +58,9 @@ class _add_transactionsState extends State<add_transactions> {
           backgroundColor: const Color(0xFF018D63),
           leading: GestureDetector(
               onTap: () {
-                Navigator.of(context).pop();
-                setState(() {});
+                setState(() {
+                  Navigator.of(context).pop();
+                });
               },
               child: const Icon(
                 Icons.arrow_back_ios_new,
@@ -171,7 +174,21 @@ class _add_transactionsState extends State<add_transactions> {
                           transactions.add(saveAmountwithoutComma);
                           transactionString.add(saveAmount);
 
-                          dateTime_Recorded = DateTime.now();
+                          print("XXXXXXXXXXXXXXXXXX");
+                          dates.add(DateFormat('dd MM yyyy').format(now));
+                          times.add(DateFormat('jm').format(now));
+
+                          if (EntryType == 'Expense') {
+                            isExpense.add(true);
+                          } else {
+                            isExpense.add(false);
+                          }
+
+                          print(dates[counter]);
+                          print(times[counter]);
+                          print(isExpense[counter]);
+                          print(counter);
+
                           listDateTime.add(DateTime.now());
 
                           counter++;
@@ -188,7 +205,6 @@ class _add_transactionsState extends State<add_transactions> {
                           ));
                           Calculation(saveAmountwithoutComma);
                           print("_______ $Total_ammount _____");
-                          print("______ $dateTime_Recorded ________");
                           ExpenseController.clear();
                         });
                       }
