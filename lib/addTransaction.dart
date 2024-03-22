@@ -19,6 +19,8 @@ class _add_transactionsState extends State<add_transactions> {
   String saveAmount = '';
   int saveAmountwithoutComma = 0;
   String EntryType = "none";
+  static int counter = 0;
+
   @override
   void initState() {
     super.initState();
@@ -150,7 +152,7 @@ class _add_transactionsState extends State<add_transactions> {
                   enableButtonWrap: true,
                   buttonTextStyle: const ButtonTextStyle(
                       selectedColor: Colors.white,
-                      unSelectedColor: Colors.black,
+                      unSelectedColor: Colors.black54,
                       textStyle: TextStyle(fontSize: 16)),
                   radioButtonValue: (value) {
                     print(value);
@@ -158,7 +160,7 @@ class _add_transactionsState extends State<add_transactions> {
                       EntryType = value;
                     });
                   },
-                  unSelectedBorderColor: Colors.black,
+                  unSelectedBorderColor: Colors.grey,
                   selectedBorderColor: const Color(0xFF018D63),
                   selectedColor: const Color(0xFF018D63),
                 ),
@@ -186,6 +188,7 @@ class _add_transactionsState extends State<add_transactions> {
                               duration: const Duration(seconds: 3),
                             ));
                             Calculation(saveAmountwithoutComma);
+                            counter++;
                             print(
                                 "______________________________ $Total_ammount _______________________________");
                             print(

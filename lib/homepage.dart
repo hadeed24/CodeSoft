@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:personal_expense_tracker/DashBoard.dart';
 import 'package:personal_expense_tracker/addTransaction.dart';
-import 'package:personal_expense_tracker/transactions.dart';
+import 'package:personal_expense_tracker/transactions_list.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -83,8 +83,8 @@ class _HomePageState extends State<HomePage> {
         });
       },
       children: [
-        const DashBoard(),
-        const transactions_list(),
+        DashBoard(),
+        transactions_list(),
       ],
     );
   }
