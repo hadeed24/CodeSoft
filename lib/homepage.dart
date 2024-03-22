@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
           leftCornerRadius: 32,
           rightCornerRadius: 32,
           gapLocation: GapLocation.center,
+          
           onTap: (p0) {
             setState(() {
               pageView = p0;
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         body: Container(
-          color: Colors.deepPurple,
+          color: Colors.white,
           child: packviewSection(),
         ),
       ),

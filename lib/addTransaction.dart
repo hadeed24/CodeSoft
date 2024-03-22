@@ -1,15 +1,12 @@
-import 'dart:ui';
-
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:personal_expense_tracker/transactions_list.dart';
+import 'package:personal_expense_tracker/variables.dart';
 
 class add_transactions extends StatefulWidget {
-  add_transactions({super.key});
+  const add_transactions({super.key});
 
   @override
   State<add_transactions> createState() => _add_transactionsState();
@@ -19,7 +16,6 @@ class _add_transactionsState extends State<add_transactions> {
   String saveAmount = '';
   int saveAmountwithoutComma = 0;
   String EntryType = "none";
-  static int counter = 0;
 
   @override
   void initState() {
@@ -50,11 +46,6 @@ class _add_transactionsState extends State<add_transactions> {
     }
   }
 
-  int Total_ammount = 0;
-  DateTime? dateTime_Recorded;
-
-  String? _selectedEntryType;
-
   TextEditingController ExpenseController = TextEditingController();
 
   @override
@@ -66,6 +57,7 @@ class _add_transactionsState extends State<add_transactions> {
           leading: GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();
+                setState(() {});
               },
               child: const Icon(
                 Icons.arrow_back_ios_new,
@@ -169,43 +161,48 @@ class _add_transactionsState extends State<add_transactions> {
                 height: 22,
               ),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF018D63),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF018D63),
+                ),
+                onPressed: checkall()
+                    ? () {
+                        setState(() {
+                          saveAmountwithoutComma = removeCommas(saveAmount);
+                          transactions.add(saveAmountwithoutComma);
+                          transactionString.add(saveAmount);
+
+                          dateTime_Recorded = DateTime.now();
+                          listDateTime.add(DateTime.now());
+
+                          counter++;
+
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: CheckExpense()
+                                ? Colors.redAccent
+                                : Colors.green,
+                            content: const Text(
+                              'Amount has been registered',
+                              style: TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                            duration: const Duration(seconds: 3),
+                          ));
+                          Calculation(saveAmountwithoutComma);
+                          print("_______ $Total_ammount _____");
+                          print("______ $dateTime_Recorded ________");
+                          ExpenseController.clear();
+                        });
+                      }
+                    : null,
+                child: Text(
+                  "Register amount",
+                  style: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
-                  onPressed: checkall()
-                      ? () {
-                          setState(() {
-                            saveAmountwithoutComma = removeCommas(saveAmount);
-                            dateTime_Recorded = DateTime.now();
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: CheckExpense()
-                                  ? Colors.redAccent
-                                  : Colors.green,
-                              content: const Text(
-                                'Amount has been registered',
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                              duration: const Duration(seconds: 3),
-                            ));
-                            Calculation(saveAmountwithoutComma);
-                            counter++;
-                            print(
-                                "______________________________ $Total_ammount _______________________________");
-                            print(
-                                "______________________________ $dateTime_Recorded _______________________________");
-                            ExpenseController.clear();
-                          });
-                        }
-                      : null,
-                  child: Text(
-                    "Register amount",
-                    style: GoogleFonts.lato(
-                      textStyle: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  )),
+                ),
+              ),
             ],
           ),
         ),
