@@ -43,6 +43,7 @@ dependencies:
   custom_radio_grouped_button: any
   intl:
   fl_chart: ^0.66.2
+  flutter_sizer: ^1.0.5
 
 dev_dependencies:
   flutter_test:

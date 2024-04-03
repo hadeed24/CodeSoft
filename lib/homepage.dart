@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 context,
                 PageTransition(
                   type: PageTransitionType.bottomToTop,
-                  child: add_transactions(),
+                  child: const add_transactions(),
                 ),
               );
             });
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
         });
       },
       children: [
-        DashBoard(),
+        const DashBoard(),
         transactions_list(),
       ],
     );

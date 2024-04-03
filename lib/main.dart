@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expense_tracker/homepage.dart';
 
-void main() {
+void main() {/* {SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(MyApp()));
+   */
   runApp(const MyApp());
 }
 
